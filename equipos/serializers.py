@@ -36,3 +36,11 @@ class GanadoresNombreEquipoSerializer(serializers.ModelSerializer):
     class Meta:
         model= Equipo
         fields= ['nombre']
+
+# TABLAS
+
+class TablaEquipoViewSerializer(serializers.ModelSerializer):
+    calificacion = serializers.FloatField(required=False)
+    class Meta:
+        model= Equipo
+        fields= ['nombre','calificacion' ]

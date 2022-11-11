@@ -65,6 +65,12 @@ class NombreEquiposGanadoresViewSet(GenericViewSet, mixins.ListModelMixin, mixin
     renderer_classes=[JSONRenderer]
     permission_classes = []
 
+# TABLAS
+class TablaAdminEquiposGanadoresViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    queryset=models.Equipo.objects.all()
+    serializer_class=serializers.TablaEquipoViewSerializer
+    renderer_classes=[JSONRenderer]
+    permission_classes = []
 
 @api_view(['GET'])
 @permission_classes([])

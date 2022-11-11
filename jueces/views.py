@@ -14,7 +14,7 @@ from rest_framework.decorators import api_view, permission_classes
 @permission_classes([])
 def login(request):
     data = request.data
-    serializer = LoginSerializer(data=data)
+    serializer = serializers.LoginSerializer(data=data)
     if(serializer.is_valid()):
         return Response(serializer.save(), status=200)
     else:
@@ -43,7 +43,14 @@ subjects=[{
 #         subjects.append(juez_data)
 #         return JsonResponse(juez_data, status=200)
 
-class VacantesServicioViewSet(GenericViewSet, mixins.CreateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin):
-    queryset=User.objects.all
+class VacantesServicioViewSet(GenericViewSet, mixins.CreateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    queryset= User.objects.all()
     serializer_class=serializers.UserSerializer
-    renderer_classes=[JSONRenderer]
+
+class viewset(GenericViewSet, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    queryset = User.objects.filter(is_active = True)
+    serializer_class = serializers.UserSerializer
+
+class JuezIndividual(GenericViewSet, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    queryset = User.objects.filter(is_active = True)
+    serializer_class = serializers.UserSerializer

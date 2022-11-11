@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['id' , 'username']
+        fields = '__all__'
 
 class LoginSerializer(serializers.Serializer):
     username=serializers.CharField(max_length=80, min_length=5, required=True)
@@ -24,6 +24,6 @@ class LoginSerializer(serializers.Serializer):
         user = self.context['user']
         token, created = Token.objects.get_or_create(user=user)
         return {
-            'user':UserSerializer(user).data,
+            'user':user.username,
             'token':token.key
         }
