@@ -25,5 +25,6 @@ class LoginSerializer(serializers.Serializer):
         token, created = Token.objects.get_or_create(user=user)
         return {
             'user':user.username,
-            'token':token.key
+            'token':token.key,
+            'admin':user.is_superuser == True
         }

@@ -29,20 +29,6 @@ subjects=[{
     "name":"Tadeo",
     "name":"Fer"}]
 
-# API Endpoints
-# @csrf_exempt
-# def list_subjects(request):
-#     if request.method == "GET":
-#         return JsonResponse(subjects, safe=False, status=200)
-#     if request.method == "POST":
-#         juez=request.body
-#         print(juez)
-#         print(type(juez))
-#         juez_data=json.loads(juez)
-#         print(juez_data)
-#         subjects.append(juez_data)
-#         return JsonResponse(juez_data, status=200)
-
 class VacantesServicioViewSet(GenericViewSet, mixins.CreateModelMixin, mixins.DestroyModelMixin, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
     queryset= User.objects.all()
     serializer_class=serializers.UserSerializer

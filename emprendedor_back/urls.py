@@ -22,8 +22,6 @@ router_jueces.register(r'', JuecesViews.viewset)
 router_jueces.register(r'individual', JuecesViews.viewset)
 
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("login/", login),
