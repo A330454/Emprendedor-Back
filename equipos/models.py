@@ -16,13 +16,16 @@ class Equipo(models.Model):
       for x in JuecesEquipo.objects.filter(equipo = self):
          promedio += x.calificacion  # type: ignore
       self.calificacion = promedio / JuecesEquipo.objects.filter(equipo = self).count()
+
    class Meta:
      db_table='Equipos'
      default_permissions=()
      verbose_name='Informacion de Equipo'
      verbose_name_plural='Informacion de Equipos'
+
+# RELACION
 class JuecesEquipo(models.Model):
-   juez = models.ForeignKey(User, on_delete=models.CASCADE, db_column="juez")
+   apocoesesto = models.ForeignKey(User, on_delete=models.CASCADE, db_column="juez")
    equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, db_column="equipo")
    calificacion=models.FloatField(null=True, blank=True, db_column='calificacion_equipo' )
    class Meta:

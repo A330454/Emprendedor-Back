@@ -16,6 +16,8 @@ router_equipos.register(r'ganadores/', EquposViews.EquiposGanadoresViewSet)
 router_equipos.register(r'ganadores/calificaciones', EquposViews.CalificacionEquiposGanadoresViewSet)
 router_equipos.register(r'ganadores/nombres', EquposViews.NombreEquiposGanadoresViewSet)
 router_equipos.register(r'adminEquipos', EquposViews.TablaAdminEquiposGanadoresViewSet)
+router_equipos.register(r'relacion', EquposViews.RelacionViewSet)
+#router_equipos.register(r'eliminarEquipos', EquposViews.EliminarEquiposViewSet.delete_all)
 
 router_jueces = DefaultRouter()
 router_jueces.register(r'', JuecesViews.viewset)
@@ -30,5 +32,5 @@ urlpatterns = [
     path("graficas/", EquposViews.graficaPastel1),
     path("mushoOjoCuate/", EquposViews.eliminar_todos_los_equipos),
     path("equipos/",include(router_equipos.urls)),
-    path("jueces/",include(router_jueces.urls)),
+    path("jueces/",include(router_jueces.urls))
 ]

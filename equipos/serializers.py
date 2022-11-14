@@ -3,6 +3,7 @@ from equipos.models import Equipo
 
 class EquipoSerializer(serializers.ModelSerializer):
     calificacion = serializers.FloatField(required=False)
+    nombre = serializers.CharField(required=True)
     class Meta:
         model= Equipo
         fields= '__all__'
@@ -44,3 +45,10 @@ class TablaEquipoViewSerializer(serializers.ModelSerializer):
     class Meta:
         model= Equipo
         fields= ['nombre','calificacion' ]
+
+# RELACION        
+class RelacionViewSerializer(serializers.ModelSerializer):
+    calificacion = serializers.FloatField(required=False)
+    class Meta:
+        model= Equipo
+        fields= ['juez', 'equipo', 'calificacion']

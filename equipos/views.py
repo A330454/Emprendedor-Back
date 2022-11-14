@@ -44,6 +44,17 @@ class TodosLosEquiposCalificacionesViewSet(GenericViewSet, mixins.ListModelMixin
     renderer_classes=[JSONRenderer]
     permission_classes = []
 
+# ELIMINAR TODOS
+class EliminarEquiposViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
+    queryset=models.Equipo.objects.all()
+    serializer_class=serializers.EquipoViewSerializer
+    renderer_classes=[JSONRenderer]
+    permission_classes = []
+
+    @api_view(['DELETE'])
+    def delete_all(request):
+        models.Equipo.objects.all().delete()
+        return Response(status=204)
 
 # GANADORES
 
@@ -69,6 +80,13 @@ class NombreEquiposGanadoresViewSet(GenericViewSet, mixins.ListModelMixin, mixin
 class TablaAdminEquiposGanadoresViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
     queryset=models.Equipo.objects.all()
     serializer_class=serializers.TablaEquipoViewSerializer
+    renderer_classes=[JSONRenderer]
+    permission_classes = []
+
+# RELACIÓN
+class RelacionViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.CreateModelMixin, mixins.DestroyModelMixin):
+    queryset=models.JuecesEquipo.objects.all()
+    serializer_class=serializers.RelacionViewSerializer
     renderer_classes=[JSONRenderer]
     permission_classes = []
 
