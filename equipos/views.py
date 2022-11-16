@@ -9,7 +9,7 @@ from . import models
 from . import serializers
 from rest_framework.renderers import JSONRenderer
 from equipos.serializers import EquipoViewSerializer
-from equipos.serializers import RelacionViewSerializer
+from equipos.serializers import RelacionViewSerializer, PruebaSerializer
 
 # POR EVALUACIÓN
 
@@ -99,9 +99,10 @@ class RelacionViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveMode
 @permission_classes([])
 def get_relacion_by_juez(request, id):
     relaciones = models.RelacionEquipoJuez.objects.filter(id_juez=id)
-    data_serializador = RelacionViewSerializer(relaciones)
-    response = [data_serializador]
-    return Response(data = response, status=200)
+    print(relaciones)
+    data_serializador = PruebaSerializer(relaciones, many=True)
+    #response = [data_serializador]
+    return Response(data_serializador.data, status=200)
 
 @api_view(['GET'])
 @permission_classes([])

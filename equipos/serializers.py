@@ -52,4 +52,9 @@ class RelacionViewSerializer(serializers.ModelSerializer):
     calificacion = serializers.FloatField(required=False)
     class Meta:
         model= RelacionEquipoJuez
-        fields= ['id_juez', 'id_equipo', 'calificacion','id']
+        fields="__all__"
+
+class PruebaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model= RelacionEquipoJuez
+        fields="__all__"
