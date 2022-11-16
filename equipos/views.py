@@ -85,7 +85,7 @@ class TablaAdminEquiposGanadoresViewSet(GenericViewSet, mixins.ListModelMixin, m
 
 # RELACIÓN
 class RelacionViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.CreateModelMixin, mixins.DestroyModelMixin):
-    queryset=models.JuecesEquipo.objects.all()
+    queryset=models.RelacionEquipoJuez.objects.all()
     serializer_class=serializers.RelacionViewSerializer
     renderer_classes=[JSONRenderer]
     permission_classes = []
@@ -98,9 +98,9 @@ def graficaPastel1(request):
     response = [equipos_evualuados,equipos_no_evualuados]
     return Response(data = response, status=200)
 
-@api_view(['GET'])
-@permission_classes([])
-def eliminar_todos_los_equipos(request):
-    todos_los_equipos = models.Equipo.objects.all()
-    data_serializador = EquipoSerializer(todos_los_equipos)
-    return Response(data_serializador, status=200)
+#@api_view(['GET'])
+#@permission_classes([])
+#def eliminar_todos_los_equipos(request):
+#    todos_los_equipos = models.Equipo.objects.all().delete()
+#    data_serializador = EquipoSerializer(todos_los_equipos)
+#    return Response(data_serializador, status=200)

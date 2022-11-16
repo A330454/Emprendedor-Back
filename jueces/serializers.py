@@ -10,8 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class LoginSerializer(serializers.Serializer):
-    username=serializers.CharField(max_length=80, min_length=5, required=True)
-    password=serializers.CharField(max_length=80, min_length=7, required=True)
+    username=serializers.CharField(max_length=80, min_length=1, required=True)
+    password=serializers.CharField(max_length=80, min_length=1, required=True)
 
     def validate(self,data):
         user = authenticate(username= data['username'], password = data['password'])

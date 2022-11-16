@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from equipos.models import Equipo
+from equipos.models import RelacionEquipoJuez
 
 class EquipoSerializer(serializers.ModelSerializer):
     calificacion = serializers.FloatField(required=False)
@@ -50,5 +51,5 @@ class TablaEquipoViewSerializer(serializers.ModelSerializer):
 class RelacionViewSerializer(serializers.ModelSerializer):
     calificacion = serializers.FloatField(required=False)
     class Meta:
-        model= Equipo
-        fields= ['juez', 'equipo', 'calificacion']
+        model= RelacionEquipoJuez
+        fields= ['nombre_juez','id_juez' ,'equipo', 'id_equipo', 'calificacion']

@@ -2,6 +2,7 @@ from django.db import models
 from django.forms import model_to_dict
 from django.contrib.auth.models import User
 
+
 # Create your models here.
 
 class Equipo(models.Model):
@@ -11,11 +12,11 @@ class Equipo(models.Model):
    def __str__(self) -> str:
       return self.nombre + " " + str(self.pk)
 
-   def actualiza_calificacion(self):
-      promedio = 0
-      for x in JuecesEquipo.objects.filter(equipo = self):
-         promedio += x.calificacion  # type: ignore
-      self.calificacion = promedio / JuecesEquipo.objects.filter(equipo = self).count()
+   # def actualiza_calificacion(self):
+   #    promedio = 0
+   #    for x in JuecesEquipo.objects.filter(equipo = self):
+   #       promedio += x.calificacion  # type: ignore
+   #    self.calificacion = promedio / JuecesEquipo.objects.filter(equipo = self).count()
 
    class Meta:
      db_table='Equipos'
@@ -24,12 +25,14 @@ class Equipo(models.Model):
      verbose_name_plural='Informacion de Equipos'
 
 # RELACION
-class JuecesEquipo(models.Model):
-   apocoesesto = models.ForeignKey(User, on_delete=models.CASCADE, db_column="juez")
-   equipo = models.ForeignKey(Equipo, on_delete=models.CASCADE, db_column="equipo")
-   calificacion=models.FloatField(null=True, blank=True, db_column='calificacion_equipo' )
+class RelacionEquipoJuez(models.Model):
+   nombre_juez = models.CharField(null=False, blank=False, db_column="juez", max_length=200)
+   id_juez = models.PositiveIntegerField(null=False, blank=False, db_column="id_juez")
+   equipo = models.CharField(null=False, blank=False, db_column="equipo", max_length=200)
+   id_equipo = models.PositiveIntegerField(null=False, blank=False, db_column="id_equipo")
+   calificacion=models.FloatField(null=True, blank=True, db_column='calificacion_equipo')
    class Meta:
-      db_table='Relacion'
+      db_table='Asignaciones'
       default_permissions=()
-      verbose_name='Informacion de Relacion'
-      verbose_name_plural='Informacion de Relaciones'
+      verbose_name='Informacion de la Relacion'
+      verbose_name_plural='Informacion de las Relaciones'
