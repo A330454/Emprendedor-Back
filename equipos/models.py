@@ -26,9 +26,7 @@ class Equipo(models.Model):
 
 # RELACION
 class RelacionEquipoJuez(models.Model):
-   nombre_juez = models.CharField(null=False, blank=False, db_column="juez", max_length=200)
    id_juez = models.PositiveIntegerField(null=False, blank=False, db_column="id_juez")
-   equipo = models.CharField(null=False, blank=False, db_column="equipo", max_length=200)
    id_equipo = models.PositiveIntegerField(null=False, blank=False, db_column="id_equipo")
    calificacion=models.FloatField(null=True, blank=True, db_column='calificacion_equipo')
    class Meta:
@@ -36,3 +34,4 @@ class RelacionEquipoJuez(models.Model):
       default_permissions=()
       verbose_name='Informacion de la Relacion'
       verbose_name_plural='Informacion de las Relaciones'
+      unique_together = [['id_juez', 'id_equipo']]

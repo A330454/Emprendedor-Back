@@ -28,5 +28,6 @@ urlpatterns = [
     path("login/", login),
     path("graficas/", EquposViews.graficaPastel1),
     path("equipos/",include(router_equipos.urls)),
-    path("jueces/",include(router_jueces.urls))
+    path("jueces/",include(router_jueces.urls)),
+    path("demo/<id>/",EquposViews.get_relacion_by_juez)
 ]

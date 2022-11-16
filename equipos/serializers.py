@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from equipos.models import Equipo
-from equipos.models import RelacionEquipoJuez
+from equipos.models import Equipo, RelacionEquipoJuez
+from django.contrib.auth.models import User
 
 class EquipoSerializer(serializers.ModelSerializer):
     calificacion = serializers.FloatField(required=False)
@@ -52,4 +52,4 @@ class RelacionViewSerializer(serializers.ModelSerializer):
     calificacion = serializers.FloatField(required=False)
     class Meta:
         model= RelacionEquipoJuez
-        fields= ['nombre_juez','id_juez' ,'equipo', 'id_equipo', 'calificacion']
+        fields= ['id_juez', 'id_equipo', 'calificacion','id']
