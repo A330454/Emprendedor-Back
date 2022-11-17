@@ -29,6 +29,8 @@ class RelacionEquipoJuez(models.Model):
    id_juez = models.PositiveIntegerField(null=False, blank=False, db_column="id_juez")
    id_equipo = models.PositiveIntegerField(null=False, blank=False, db_column="id_equipo")
    calificacion=models.FloatField(null=True, blank=True, db_column='calificacion_equipo')
+   nombre_juez=models.CharField(null=False, blank=False, db_column='nombre_juez', max_length=200)
+   nombre_equipo=models.CharField(null=False, blank=False, db_column='nombre_equipo', max_length=200)
    class Meta:
       db_table='Asignaciones'
       default_permissions=()
