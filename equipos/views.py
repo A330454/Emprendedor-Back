@@ -106,6 +106,29 @@ def get_relacion_by_juez(request, id):
 
 @api_view(['GET'])
 @permission_classes([])
+def get_relacion_by_equipo(request, id):
+    if request.method == "GET":
+        relaciones = models.RelacionEquipoJuez.objects.filter(id_equipo=id)
+        print(relaciones)
+        data_serializador = PruebaSerializer(relaciones, many=True)
+        #response = [data_serializador]
+        return Response(data_serializador.data, status=200)
+    if request.method == "PATCH":
+        pass
+    else:
+        return Response("method not allowed", 405)
+
+@api_view(['GET'])
+@permission_classes([])
+def get_1_relacion(request, id):
+    relaciones = models.RelacionEquipoJuez.objects.filter(id)
+    print(relaciones)
+    data_serializador = PruebaSerializer(relaciones, many=True)
+    #response = [data_serializador]
+    return Response(data_serializador.data, status=200)
+
+@api_view(['GET'])
+@permission_classes([])
 def graficaPastel1(request):
     equipos_evualuados = models.Equipo.objects.filter(calificacion=None).count()
     equipos_no_evualuados = models.Equipo.objects.all().exclude(calificacion=None).count()
