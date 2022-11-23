@@ -91,6 +91,13 @@ class RelacionViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveMode
     renderer_classes=[JSONRenderer]
     permission_classes = []
 
+# CONTAR RELACIONES CON CALIFICACION
+#class RelacionCountNotNullViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.CreateModelMixin, mixins.DestroyModelMixin):
+#    queryset=models.RelacionEquipoJuez.objects.all().exclude(calificacion=None)
+#    serializer_class=serializers.RelacionViewSerializer
+#    renderer_classes=[JSONRenderer]
+#    permission_classes = []
+
     # def retrieve(self, request, *args, **kwargs):
     #     calificaiones = models.RelacionEquipoJuez.objects.filter('')
     #     return super().retrieve(request, *args, **kwargs)
@@ -118,6 +125,37 @@ def get_relacion_by_equipo(request, id):
     else:
         return Response("method not allowed", 405)
 
+# COUNT
+@api_view(['GET'])
+@permission_classes([])
+def cuenta_relacionones_calificadas_by_equipo(request, id):
+    if request.method == "GET":
+        relaciones = models.RelacionEquipoJuez.objects.filter(id_equipo=id).exclude(calificacion=None).count()
+        print(relaciones)
+        data_serializador = PruebaSerializer(relaciones)
+        #response = [data_serializador]
+        return Response(relaciones, status=200)
+    if request.method == "PATCH":
+        pass
+    else:
+        return Response("method not allowed", 405)
+
+
+@api_view(['GET'])
+@permission_classes([])
+def relacionones_calificadas_by_equipo(request, id):
+    if request.method == "GET":
+        relaciones = models.RelacionEquipoJuez.objects.filter(id_equipo=id).exclude(calificacion=None)
+        print(relaciones)
+        data_serializador = PruebaSerializer(relaciones, many=True)
+        #response = [data_serializador]
+        return Response(data_serializador.data, status=200)
+    if request.method == "PATCH":
+        pass
+    else:
+        return Response("method not allowed", 405)
+
+
 @api_view(['GET'])
 @permission_classes([])
 def get_1_relacion(request, id):
@@ -135,9 +173,23 @@ def graficaPastel1(request):
     response = [equipos_evualuados,equipos_no_evualuados]
     return Response(data = response, status=200)
 
+
+
 #@api_view(['GET'])
 #@permission_classes([])
 #def eliminar_todos_los_equipos(request):
 #    todos_los_equipos = models.Equipo.objects.all().delete()
 #    data_serializador = EquipoSerializer(todos_los_equipos)
 #    return Response(data_serializador, status=200)
+
+
+#@api_view(['GET'])
+#@permission_classes([])
+#def get_cal_equip(request, equipo):
+#    try:
+#        equipo = models.Equipo.objects.get(pk=equipo)
+#    except:
+#        pass ##quipo no exixte, no fue encontradp
+#
+#    equipo.actualiza_calificacion()
+#    return(equipo.calificacion, 200)

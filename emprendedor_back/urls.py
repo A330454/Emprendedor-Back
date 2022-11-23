@@ -17,6 +17,7 @@ router_equipos.register(r'ganadores/calificaciones', EquposViews.CalificacionEqu
 router_equipos.register(r'ganadores/nombres', EquposViews.NombreEquiposGanadoresViewSet)
 router_equipos.register(r'adminEquipos', EquposViews.TablaAdminEquiposGanadoresViewSet)
 router_equipos.register(r'relacion', EquposViews.RelacionViewSet)
+#router_equipos.register(r'relaciones/calificadas', EquposViews.RelacionCountNotNullViewSet)
 
 router_jueces = DefaultRouter()
 router_jueces.register(r'', JuecesViews.viewset)
@@ -30,6 +31,9 @@ urlpatterns = [
     path("equipos/",include(router_equipos.urls)),
     path("jueces/",include(router_jueces.urls)),
     path("relacionByJuez/<id>/",EquposViews.get_relacion_by_juez),
-    path("relacionByEquipo/<id>/",EquposViews.get_relacion_by_equipo)
+    path("relacionByEquipo/<id>/",EquposViews.get_relacion_by_equipo),
+    path("relaciones/calificadas/<id>/",EquposViews.cuenta_relacionones_calificadas_by_equipo),
+    path("relaciones/output/<id>/",EquposViews.relacionones_calificadas_by_equipo)
+    # path("endpoint/",EquposViews.get_cal_equip)
     # path("unaRelacion/<id>/",EquposViews.get_1_relacion)
 ]
