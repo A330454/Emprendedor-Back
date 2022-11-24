@@ -22,7 +22,14 @@ def login(request):
 
 @api_view(['GET'])
 def hola(request):
+    #////////////////////////////////////////////////////////////request.user
     return Response("simon", 200)
+
+# BUSCAR USER BY TOKEN
+@api_view(['GET'])
+def token_a_user(request):
+    response = request.user
+    return Response(response, 200)
 
 subjects=[{
     "name":"Brayan",

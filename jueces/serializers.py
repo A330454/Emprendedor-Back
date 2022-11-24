@@ -9,6 +9,10 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+    def create(self, validated_data):
+        user = User.objects.create_user(**validated_data)
+        return user
+
 class LoginSerializer(serializers.Serializer):
     username=serializers.CharField(max_length=80, min_length=1, required=True)
     password=serializers.CharField(max_length=80, min_length=1, required=True)
@@ -26,5 +30,6 @@ class LoginSerializer(serializers.Serializer):
         return {
             'user':user.username,
             'token':token.key,
+            'info':user.id,
             'admin':user.is_superuser == True
         }

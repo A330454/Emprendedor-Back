@@ -31,9 +31,11 @@ urlpatterns = [
     path("equipos/",include(router_equipos.urls)),
     path("jueces/",include(router_jueces.urls)),
     path("relacionByJuez/<id>/",EquposViews.get_relacion_by_juez),
+    path("relacionByJuezNull/<id>/",EquposViews.get_relacion_null_by_juez),
     path("relacionByEquipo/<id>/",EquposViews.get_relacion_by_equipo),
     path("relaciones/calificadas/<id>/",EquposViews.cuenta_relacionones_calificadas_by_equipo),
-    path("relaciones/output/<id>/",EquposViews.relacionones_calificadas_by_equipo)
+    path("relaciones/output/<id>/",EquposViews.relacionones_calificadas_by_equipo),
+    path('userByToken/<token>/',JuecesViews.token_a_user)
     # path("endpoint/",EquposViews.get_cal_equip)
     # path("unaRelacion/<id>/",EquposViews.get_1_relacion)
 ]

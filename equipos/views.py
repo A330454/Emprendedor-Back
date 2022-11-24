@@ -102,10 +102,21 @@ class RelacionViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveMode
     #     calificaiones = models.RelacionEquipoJuez.objects.filter('')
     #     return super().retrieve(request, *args, **kwargs)
 
+# RELACIONES NO EVALUADAS
 @api_view(['GET'])
 @permission_classes([])
 def get_relacion_by_juez(request, id):
     relaciones = models.RelacionEquipoJuez.objects.filter(id_juez=id)
+    print(relaciones)
+    data_serializador = PruebaSerializer(relaciones, many=True)
+    #response = [data_serializador]
+    return Response(data_serializador.data, status=200)
+
+# RELACIONES NO EVALUADAS POR JUEZ
+@api_view(['GET'])
+@permission_classes([])
+def get_relacion_null_by_juez(request, id):
+    relaciones = models.RelacionEquipoJuez.objects.filter(id_juez=id, calificacion=None)
     print(relaciones)
     data_serializador = PruebaSerializer(relaciones, many=True)
     #response = [data_serializador]
