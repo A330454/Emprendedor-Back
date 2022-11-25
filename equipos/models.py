@@ -20,7 +20,7 @@ class Equipo(models.Model):
 
    class Meta:
      db_table='Equipos'
-     default_permissions=()
+     #default_permissions=()
      verbose_name='Informacion de Equipo'
      verbose_name_plural='Informacion de Equipos'
 

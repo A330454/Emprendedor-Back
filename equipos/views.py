@@ -46,16 +46,18 @@ class TodosLosEquiposCalificacionesViewSet(GenericViewSet, mixins.ListModelMixin
     permission_classes = []
 
 # ELIMINAR TODOS
-class EliminarEquiposViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin):
-    queryset=models.Equipo.objects.all()
-    serializer_class=serializers.EquipoViewSerializer
-    renderer_classes=[JSONRenderer]
-    permission_classes = []
+class EliminarEquipos(APIView):
+    def delete(self, request):
+        queryset = models.Equipo.objects.all()
+        queryset.delete()
+        return Response(status=200)
 
-    @api_view(['DELETE'])
-    def delete_all(request):
-        models.Equipo.objects.all().delete()
-        return Response(status=204)
+# ELIMINAR TODAS LAS RELACIONES
+class EliminarRelaciones(APIView):
+    def delete(self, request):
+        queryset = models.RelacionEquipoJuez.objects.all()
+        queryset.delete()
+        return Response(status=200)
 
 # GANADORES
 
@@ -91,16 +93,13 @@ class RelacionViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveMode
     renderer_classes=[JSONRenderer]
     permission_classes = []
 
-# CONTAR RELACIONES CON CALIFICACION
-#class RelacionCountNotNullViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.CreateModelMixin, mixins.DestroyModelMixin):
-#    queryset=models.RelacionEquipoJuez.objects.all().exclude(calificacion=None)
-#    serializer_class=serializers.RelacionViewSerializer
-#    renderer_classes=[JSONRenderer]
-#    permission_classes = []
-
-    # def retrieve(self, request, *args, **kwargs):
-    #     calificaiones = models.RelacionEquipoJuez.objects.filter('')
-    #     return super().retrieve(request, *args, **kwargs)
+# ELIMINAR TODOS LOS EQUIPOS
+#@api_view(['GET'])
+#@permission_classes([])
+#def delete_all(request):
+#    todos_los_equipos = models.Equipo.objects.all()
+#    data_serializador = PruebaSerializer(todos_los_equipos, many=True)
+#    return Response(data_serializador, status=204)
 
 # RELACIONES NO EVALUADAS
 @api_view(['GET'])
@@ -136,7 +135,7 @@ def get_relacion_by_equipo(request, id):
     else:
         return Response("method not allowed", 405)
 
-# COUNT
+# CONTAR RELAICONES CALIFICADAS PARA PROMEDIO DE CALIFICACIONES
 @api_view(['GET'])
 @permission_classes([])
 def cuenta_relacionones_calificadas_by_equipo(request, id):
@@ -151,6 +150,7 @@ def cuenta_relacionones_calificadas_by_equipo(request, id):
     else:
         return Response("method not allowed", 405)
 
+# RELACIONES
 
 @api_view(['GET'])
 @permission_classes([])
@@ -175,6 +175,8 @@ def get_1_relacion(request, id):
     data_serializador = PruebaSerializer(relaciones, many=True)
     #response = [data_serializador]
     return Response(data_serializador.data, status=200)
+
+# DATA PARA GRÁFICA PASTEL
 
 @api_view(['GET'])
 @permission_classes([])
