@@ -2,8 +2,8 @@ from django.contrib import admin
 from django.urls import path, include
 from jueces.views import login,hola,subjects
 from rest_framework.routers import DefaultRouter
-from jueces import views as JuecesViews
 from rest_framework.urlpatterns import format_suffix_patterns 
+from jueces import views as JuecesViews
 from equipos import views as EquposViews
 
 # GENETIC VIEWSETS "Equipos"

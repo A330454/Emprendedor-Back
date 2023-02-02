@@ -2,13 +2,12 @@ from django.db import models
 from django.forms import model_to_dict
 from django.contrib.auth.models import User
 
-
 # Create your models here.
 
 class Equipo(models.Model):
-   nombre=models.CharField(null=True, blank=True,  max_length=50, db_column='nombre_equipo')
+   nombre=models.CharField(null=False, blank=False,  max_length=50, db_column='nombre_equipo')
    calificacion=models.FloatField(null=True, blank=True, db_column='calificacion_equipo' )
-
+   maestro_asesor=models.CharField(max_length=300,null=False,blank=False)
    #def __str__(self) -> str:
    #   return self.nombre + " " + str(self.pk)
 #
