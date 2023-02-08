@@ -10,6 +10,7 @@ from . import serializers
 from rest_framework.renderers import JSONRenderer
 from equipos.serializers import EquipoViewSerializer
 from equipos.serializers import RelacionViewSerializer, PruebaSerializer
+from rest_framework.viewsets import ModelViewSet
 
 # POR EVALUACIÓN
 
@@ -81,7 +82,7 @@ class NombreEquiposGanadoresViewSet(GenericViewSet, mixins.ListModelMixin, mixin
 
 # TABLAS
 class TablaAdminEquiposGanadoresViewSet(GenericViewSet, mixins.ListModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
-    queryset=models.Equipo.objects.all()
+    queryset=models.Equipo.objects.all().order_by("maestro_asesor")
     serializer_class=serializers.TablaEquipoViewSerializer
     renderer_classes=[JSONRenderer]
     permission_classes = []
@@ -206,3 +207,10 @@ def graficaPastel1(request):
 #
 #    equipo.actualiza_calificacion()
 #    return(equipo.calificacion, 200)
+
+# Maestro Asesor
+class MaestroAsesorViewSet(ModelViewSet):
+    queryset=models.maestroAsesor.objects.all()
+    serializer_class=serializers.MaestroAsesorSerializer
+    renderer_classes=[JSONRenderer]
+    permission_classes = []
