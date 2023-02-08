@@ -36,3 +36,12 @@ class RelacionEquipoJuez(models.Model):
       verbose_name='Informacion de la Relacion'
       verbose_name_plural='Informacion de las Relaciones'
       unique_together = [['id_juez', 'id_equipo']]
+
+# MAESTRO ASESOR
+class maestroAsesor(models.Model):
+   nombre=models.CharField(null=False, blank=False,  max_length=50, db_column='nombre_equipo')
+   class Meta:
+     db_table='maestroAsesor'
+     default_permissions=()
+     verbose_name='Informacion de Maestro Asesor'
+     verbose_name_plural='Informacion de Maestros Asesores'

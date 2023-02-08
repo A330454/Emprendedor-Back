@@ -18,6 +18,7 @@ router_equipos.register(r'ganadores/calificaciones', EquposViews.CalificacionEqu
 router_equipos.register(r'ganadores/nombres', EquposViews.NombreEquiposGanadoresViewSet)
 router_equipos.register(r'adminEquipos', EquposViews.TablaAdminEquiposGanadoresViewSet)
 router_equipos.register(r'relacion', EquposViews.RelacionViewSet)
+router_equipos.register(r'maestro-asesor', EquposViews.MaestroAsesorViewSet)
 
 # GENETIC VIEWSETS "Jueces"
 router_jueces = DefaultRouter()
