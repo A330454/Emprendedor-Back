@@ -1,0 +1,1 @@
+web: gunicorn emprendedor_back.wsgi
