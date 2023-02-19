@@ -27,7 +27,7 @@ SECRET_KEY = "q806FJ3vg3YUjuR8i76EtY2DLWi2GeVfk2CJuaqPTYtOyaqiK9"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['localhost','emprendedorbackend.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 CORS_ALLOW_ALL_ORIGINS  = True
 
