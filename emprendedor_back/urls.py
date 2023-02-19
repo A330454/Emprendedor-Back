@@ -6,6 +6,9 @@ from rest_framework.urlpatterns import format_suffix_patterns
 from jueces import views as JuecesViews
 from equipos import views as EquposViews
 
+from django.conf import settings
+from django.conf.urls.static import static 
+
 # GENETIC VIEWSETS "Equipos"
 router_equipos = DefaultRouter()
 router_equipos.register(r'noEvaluados', EquposViews.EquiposSinEvaluarViewSet)
@@ -45,4 +48,4 @@ urlpatterns = [
 
     # path("endpoint/",EquposViews.get_cal_equip)
     # path("unaRelacion/<id>/",EquposViews.get_1_relacion)
-]
+] + static(settings.STATIC_URL,document_root=settings.STATIC_ROOT)

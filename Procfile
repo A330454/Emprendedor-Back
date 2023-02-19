@@ -1,1 +1,1 @@
-web: gunicorn emprendedor_back.wsgi
+web: gunicorn emprendedor_back.wsgi --log-file -
