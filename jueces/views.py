@@ -51,3 +51,6 @@ class JuezIndividual(GenericViewSet, mixins.ListModelMixin, mixins.DestroyModelM
     queryset = User.objects.filter(is_active = True)
     serializer_class = serializers.UserSerializer
 
+class SuperUserViewset(GenericViewSet, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
+    queryset = User.objects.filter(is_superuser = True)
+    serializer_class = serializers.UserSerializer

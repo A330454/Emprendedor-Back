@@ -28,6 +28,8 @@ router_jueces = DefaultRouter()
 router_jueces.register(r'', JuecesViews.viewset)
 router_jueces.register(r'individual', JuecesViews.viewset)
 
+router_admin = DefaultRouter()
+router_admin.register(r'', JuecesViews.SuperUserViewset)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -35,6 +37,7 @@ urlpatterns = [
     path("graficas/", EquposViews.graficaPastel1),
     path("equipos/",include(router_equipos.urls)),
     path("jueces/",include(router_jueces.urls)),
+    path("admins/",include(router_admin.urls)),
     path("relacionByJuez/<id>/",EquposViews.get_relacion_by_juez),
     path("relacionByJuezNull/<id>/",EquposViews.get_relacion_null_by_juez),
     path("relacionByEquipo/<id>/",EquposViews.get_relacion_by_equipo),
