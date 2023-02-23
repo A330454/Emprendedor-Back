@@ -1,13 +1,16 @@
-from rest_framework.viewsets import mixins, GenericViewSet
+from django.contrib.auth.models import User
+
 from . import models
 from . import serializers
+
 from rest_framework.renderers import JSONRenderer
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import permissions
 from rest_framework import views
-from django.contrib.auth.models import User
 from rest_framework.decorators import api_view, permission_classes
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.viewsets import mixins, GenericViewSet
 
 # Create your views here.
 @api_view(['POST'])
@@ -41,9 +44,10 @@ class VacantesServicioViewSet(GenericViewSet, mixins.CreateModelMixin, mixins.De
     serializer_class=serializers.UserSerializer
 
 class viewset(GenericViewSet, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
-    queryset = User.objects.filter(is_active = True)
+    queryset = User.objects.filter(is_superuser = False)
     serializer_class = serializers.UserSerializer
 
 class JuezIndividual(GenericViewSet, mixins.ListModelMixin, mixins.DestroyModelMixin, mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins.UpdateModelMixin):
     queryset = User.objects.filter(is_active = True)
     serializer_class = serializers.UserSerializer
+
