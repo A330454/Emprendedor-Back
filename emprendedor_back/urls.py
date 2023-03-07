@@ -32,7 +32,7 @@ router_admin = DefaultRouter()
 router_admin.register(r'', JuecesViews.SuperUserViewset)
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls), 
     path("login/", login),
     path("graficas/", EquposViews.graficaPastel1),
     path("equipos/",include(router_equipos.urls)),
